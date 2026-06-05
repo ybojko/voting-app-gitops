@@ -11,6 +11,25 @@ spec:
     repoURL: https://github.com/ybojko/voting-app-gitops.git
     targetRevision: HEAD
     path: helm-charts/result
+    helm:
+      values: |
+        replicaCount: 1
+        image:
+          repository: ghcr.io/ybojko/voting-app-result
+          tag: v1
+          pullPolicy: IfNotPresent
+        service:
+          type: NodePort
+          port: 80
+          nodePort: 30081
+        env:
+          DB_HOST: postgres-postgresql
+          DB_PORT: "5432"
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          DB_NAME: postgres
+        imagePullSecrets:
+          - name: ghcr-secret
   destination:
     server: https://kubernetes.default.svc
     namespace: voting
