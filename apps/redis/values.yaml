@@ -1,7 +1,0 @@
-image:
-  repository: redis
-  tag: alpine
-  pullPolicy: IfNotPresent
-
-service:
-  port: 6379
