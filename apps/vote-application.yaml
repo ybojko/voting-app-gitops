@@ -16,7 +16,7 @@ spec:
         replicaCount: 1
         image:
           repository: ghcr.io/ybojko/voting-app-vote
-          tag: latest
+          tag: v1
           pullPolicy: IfNotPresent
         service:
           type: NodePort
