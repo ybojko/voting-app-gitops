@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: db-alias
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ybojko/voting-app-gitops.git
+    targetRevision: HEAD
+    path: helm-charts/db-alias
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: voting
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
