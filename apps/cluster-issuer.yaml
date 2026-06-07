@@ -14,10 +14,10 @@ spec:
     helm:
       values: |
         cloudflare:
-          email: <CLOUDFLARE_EMAIL_PLACEHOLDER>
-          apiToken: <CLOUDFLARE_API_TOKEN_PLACEHOLDER>
+          email: yurkabojko@gmail.com
+          apiToken: cfut_4Mf0xwvENakLfrRpx8W8A0brhflx35FFVjTe89W10c713650
         issuer:
-          email: <LETSENCRYPT_EMAIL_PLACEHOLDER>
+          email: yurkabojko@gmail.com
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
