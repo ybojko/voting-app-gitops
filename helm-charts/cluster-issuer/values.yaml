@@ -1,0 +1,8 @@
+cloudflare:
+  email: ""       # Cloudflare account email
+  apiToken: ""    # Cloudflare API token (Zone:DNS:Edit + Zone:Read)
+
+issuer:
+  email: ""       # Let's Encrypt notification email
+  server: https://acme-v02.api.letsencrypt.org/directory  # production
+  # server: https://acme-staging-v02.api.letsencrypt.org/directory  # staging (for testing)

@@ -19,9 +19,13 @@ spec:
           tag: v1
           pullPolicy: IfNotPresent
         service:
-          type: NodePort
+          type: ClusterIP
           port: 80
-          nodePort: 30080
+        httproute:
+          enabled: true
+          gatewayName: voting-app-gateway
+          gatewayNamespace: voting
+          hostname: vote.redf1ag.xyz
         env:
           REDIS_HOST: redis
           REDIS_PORT: "6379"

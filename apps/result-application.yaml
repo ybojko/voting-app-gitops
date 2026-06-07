@@ -19,9 +19,13 @@ spec:
           tag: v1
           pullPolicy: IfNotPresent
         service:
-          type: NodePort
+          type: ClusterIP
           port: 80
-          nodePort: 30081
+        httproute:
+          enabled: true
+          gatewayName: voting-app-gateway
+          gatewayNamespace: voting
+          hostname: result.redf1ag.xyz
         env:
           DB_HOST: postgres-postgresql
           DB_PORT: "5432"

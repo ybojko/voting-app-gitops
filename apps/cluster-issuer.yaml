@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-issuer
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ybojko/voting-app-gitops.git
+    targetRevision: HEAD
+    path: helm-charts/cluster-issuer
+    helm:
+      values: |
+        cloudflare:
+          email: <CLOUDFLARE_EMAIL_PLACEHOLDER>
+          apiToken: <CLOUDFLARE_API_TOKEN_PLACEHOLDER>
+        issuer:
+          email: <LETSENCRYPT_EMAIL_PLACEHOLDER>
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

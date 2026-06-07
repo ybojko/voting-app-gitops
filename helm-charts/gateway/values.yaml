@@ -1,0 +1,16 @@
+gateway:
+  name: voting-app-gateway
+  namespace: voting
+
+listeners:
+  https:
+    port: 443
+    certificateSecret: voting-app-tls
+
+certificate:
+  name: voting-app-tls
+  issuerName: letsencrypt-prod
+  issuerKind: ClusterIssuer
+  domains:
+    - vote.redf1ag.xyz
+    - result.redf1ag.xyz
