@@ -19,7 +19,10 @@ spec:
           name: aws-load-balancer-controller
           annotations:
             eks.amazonaws.com/role-arn: arn:aws:iam::179686849870:role/voting-app-eks-lb-controller
-        enableGatewayApiController: true
+        enableServiceMutatorWebhook: false
+        extraArgs:
+          enable-gateway-api: true
+          enable-leader-election: true
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
