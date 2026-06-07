@@ -20,7 +20,8 @@ spec:
           annotations:
             eks.amazonaws.com/role-arn: arn:aws:iam::179686849870:role/voting-app-eks-lb-controller
         enableServiceMutatorWebhook: false
-        enableGatewayApiController: true
+        env:
+          ENABLE_GATEWAY_API_CONTROLLER: "true"
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
