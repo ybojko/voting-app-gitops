@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://aws.github.io/eks-charts
     chart: aws-load-balancer-controller
-    targetRevision: 1.10.x
+    targetRevision: 1.11.x
     helm:
       values: |
         clusterName: voting-app-eks
@@ -20,9 +20,7 @@ spec:
           annotations:
             eks.amazonaws.com/role-arn: arn:aws:iam::179686849870:role/voting-app-eks-lb-controller
         enableServiceMutatorWebhook: false
-        extraArgs:
-          enable-gateway-api: true
-          enable-leader-election: true
+        enableGatewayApiController: true
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
