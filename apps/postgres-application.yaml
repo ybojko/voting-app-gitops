@@ -10,10 +10,15 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: postgresql
-    targetRevision: 18.7.0
+    targetRevision: 18.7.2
     helm:
-      valueFiles:
-        - values.yaml
+      values: |
+        auth:
+          postgresPassword: postgres
+          database: postgres
+        primary:
+          persistence:
+            size: 1Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: voting
