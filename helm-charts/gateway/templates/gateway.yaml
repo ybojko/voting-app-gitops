@@ -21,6 +21,10 @@ spec:
           - group: ""
             kind: Secret
             name: {{ .Values.listeners.https.certificateSecret }}
+{{- if .Values.listeners.https.acmCertificateArn }}
+        options:
+          application-networking.k8s.aws/certificate-arn: "{{ .Values.listeners.https.acmCertificateArn }}"
+{{- end }}
       allowedRoutes:
         namespaces:
           from: Same
