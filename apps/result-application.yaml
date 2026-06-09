@@ -30,8 +30,11 @@ spec:
           DB_HOST: postgres-postgresql
           DB_PORT: "5432"
           DB_USER: postgres
-          DB_PASSWORD: postgres
           DB_NAME: postgres
+        secretEnv:
+          DB_PASSWORD:
+            secretName: postgres-password
+            key: postgres-password
         imagePullSecrets:
           - name: ghcr-secret
   destination:

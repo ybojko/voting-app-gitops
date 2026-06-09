@@ -1,0 +1,5 @@
+gatewayName: voting-app-gateway
+gatewayNamespace: voting
+hostname: grafana.redf1ag.xyz
+backendService: monitoring-grafana
+backendPort: 80

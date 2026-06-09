@@ -1,0 +1,5 @@
+apiVersion: v2
+name: eso-external-secrets
+description: ExternalSecret resources synced from AWS Secrets Manager
+type: application
+version: 0.1.0

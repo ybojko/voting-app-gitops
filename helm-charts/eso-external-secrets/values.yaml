@@ -1,0 +1,15 @@
+# Postgres password — used by Bitnami Postgres chart
+postgresPassword:
+  secretKey: voting-app-eks-postgres-password
+
+# Cloudflare API token — used by cert-manager ClusterIssuer and external-dns
+cloudflareApiToken:
+  secretKey: voting-app-eks-cloudflare-api-token
+
+# GitHub personal access token — used by ArgoCD repo secret
+githubToken:
+  secretKey: voting-app-eks-github-token
+
+# Grafana OAuth client secret — used by Grafana for Keycloak OIDC
+grafanaOauth:
+  secretKey: voting-app-eks-grafana-oauth-client-secret

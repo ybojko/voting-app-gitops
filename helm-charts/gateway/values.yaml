@@ -15,3 +15,5 @@ certificate:
   domains:
     - vote.redf1ag.xyz
     - result.redf1ag.xyz
+    - grafana.redf1ag.xyz
+    - keycloak.redf1ag.xyz

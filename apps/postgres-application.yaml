@@ -14,7 +14,7 @@ spec:
     helm:
       values: |
         auth:
-          postgresPassword: postgres
+          existingSecret: postgres-password
           database: postgres
         primary:
           persistence:
