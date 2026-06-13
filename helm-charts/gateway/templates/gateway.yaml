@@ -5,7 +5,8 @@ metadata:
   namespace: {{ .Values.gateway.namespace }}
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/subnets: subnet-0b656dfadcb56eaca,subnet-05300f20632c23689,subnet-0f69f39b8ba5e8f90
 spec:
   gatewayClassName: alb
   listeners:
