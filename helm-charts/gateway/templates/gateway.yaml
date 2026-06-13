@@ -15,6 +15,7 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+{{- if .Values.listeners.https.enabled }}
     - name: https
       protocol: HTTPS
       port: {{ .Values.listeners.https.port }}
@@ -31,3 +32,4 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+{{- end }}

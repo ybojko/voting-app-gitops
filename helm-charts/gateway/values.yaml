@@ -4,6 +4,7 @@ gateway:
 
 listeners:
   https:
+    enabled: false
     port: 443
     certificateSecret: voting-app-tls
     acmCertificateArn: ""
