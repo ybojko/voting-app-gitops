@@ -5,6 +5,7 @@ metadata:
   namespace: {{ .Values.gateway.namespace }}
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   gatewayClassName: alb
   listeners:
