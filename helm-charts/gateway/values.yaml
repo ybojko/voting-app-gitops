@@ -6,7 +6,7 @@ listeners:
   https:
     port: 443
     certificateSecret: voting-app-tls
-    acmCertificateArn: arn:aws:acm:eu-central-1:179686849870:certificate/bd0aad06-3ee3-41c5-84c1-5a70322ae156
+    acmCertificateArn: ""
 
 certificate:
   name: voting-app-tls

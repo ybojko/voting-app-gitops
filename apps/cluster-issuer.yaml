@@ -18,6 +18,7 @@ spec:
           existingSecret: cloudflare-api-token
         issuer:
           email: yurkabojko@gmail.com
+          server: https://acme-staging-v02.api.letsencrypt.org/directory
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
