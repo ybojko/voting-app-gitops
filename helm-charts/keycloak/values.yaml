@@ -1,0 +1,15 @@
+replicaCount: 1
+image:
+  repository: quay.io/keycloak/keycloak
+  tag: "25.0.6"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 8080
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi
