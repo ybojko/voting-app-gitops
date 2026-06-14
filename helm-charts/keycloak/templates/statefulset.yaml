@@ -21,7 +21,6 @@ spec:
           command:
             - /opt/keycloak/bin/kc.sh
             - start
-            - --optimized
             - --proxy-headers=xforwarded
             - --http-enabled=true
             - --db=dev-file
@@ -49,7 +48,12 @@ spec:
                   key: password
                   optional: true
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            requests:
+              cpu: 50m
+              memory: 384Mi
+            limits:
+              cpu: 500m
+              memory: 768Mi
           livenessProbe:
             httpGet:
               path: /q/health/live
