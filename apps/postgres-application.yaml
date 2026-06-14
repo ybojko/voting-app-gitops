@@ -19,6 +19,7 @@ spec:
         primary:
           persistence:
             size: 1Gi
+            storageClass: gp2
   destination:
     server: https://kubernetes.default.svc
     namespace: voting
