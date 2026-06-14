@@ -21,11 +21,14 @@ spec:
           - "/opt/keycloak/bin/kc.sh"
           - "start"
           - "--proxy=edge"
+          - "--db=dev-file"
         extraEnv: |
           - name: KC_HOSTNAME
             value: keycloak.redf1ag.xyz
           - name: KC_PROXY
             value: edge
+          - name: KC_DB
+            value: dev-file
         resources:
           requests:
             cpu: 100m
@@ -34,21 +37,7 @@ spec:
             cpu: 500m
             memory: 1Gi
         postgresql:
-          enabled: true
-          auth:
-            username: keycloak
-            database: keycloak
-          primary:
-            resources:
-              requests:
-                cpu: 50m
-                memory: 128Mi
-              limits:
-                cpu: 200m
-                memory: 256Mi
-            persistence:
-              size: 1Gi
-              storageClass: gp2
+          enabled: false
         ingress:
           enabled: false
   destination:
