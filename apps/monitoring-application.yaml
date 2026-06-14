@@ -71,6 +71,7 @@ spec:
             enabled: true
             size: 1Gi
           env:
+            GF_SERVER_ROOT_URL: "https://grafana.redf1ag.xyz"
             GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
             GF_AUTH_GENERIC_OAUTH_NAME: keycloak
             GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
