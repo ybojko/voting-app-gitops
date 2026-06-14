@@ -1,28 +1,15 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
-  name: grafana
+  name: grafana-route
   namespace: monitoring
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/group.name: voting-app
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/ssl-redirect: "443"
 spec:
-  ingressClassName: alb
-  tls:
-    - hosts:
-        - {{ .Values.hostname }}
-      secretName: voting-app-tls
+  parentRefs:
+    - name: voting-gateway
+      namespace: voting
+  hostnames:
+    - {{ .Values.hostname | quote }}
   rules:
-    - host: {{ .Values.hostname }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .Values.serviceName }}
-                port:
-                  number: {{ .Values.servicePort }}
+    - backendRefs:
+        - name: {{ .Values.serviceName }}
+          port: {{ .Values.servicePort }}

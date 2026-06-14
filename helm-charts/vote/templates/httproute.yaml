@@ -1,31 +1,19 @@
 {{- if .Values.ingress.enabled }}
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
-  name: {{ include "vote.name" . }}
+  name: {{ include "vote.name" . }}-route
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "vote.labels" . | nindent 4 }}
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/group.name: voting-app
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/ssl-redirect: "443"
 spec:
-  ingressClassName: alb
-  tls:
-    - hosts:
-        - {{ .Values.ingress.hostname }}
-      secretName: voting-app-tls
+  parentRefs:
+    - name: voting-gateway
+      namespace: voting
+  hostnames:
+    - {{ .Values.ingress.hostname | quote }}
   rules:
-    - host: {{ .Values.ingress.hostname }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "vote.name" . }}
-                port:
-                  number: {{ .Values.service.port }}
+    - backendRefs:
+        - name: {{ include "vote.name" . }}
+          port: {{ .Values.service.port }}
 {{- end }}
