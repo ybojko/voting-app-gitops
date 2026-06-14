@@ -1,5 +1,0 @@
-gatewayName: voting-app-gateway
-gatewayNamespace: voting
-hostname: keycloak.redf1ag.xyz
-backendService: keycloak
-backendPort: 80

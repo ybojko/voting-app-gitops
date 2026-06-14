@@ -21,10 +21,8 @@ spec:
         service:
           type: ClusterIP
           port: 80
-        httproute:
+        ingress:
           enabled: true
-          gatewayName: voting-app-gateway
-          gatewayNamespace: voting
           hostname: vote.redf1ag.xyz
         env:
           REDIS_HOST: redis

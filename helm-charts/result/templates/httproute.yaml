@@ -1,22 +1,23 @@
-{{- if .Values.httproute.enabled }}
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: {{ include "result.name" . }}
   labels:
     {{- include "result.labels" . | nindent 4 }}
+  annotations:
+    alb.ingress.kubernetes.io/group.name: voting-app
 spec:
-  parentRefs:
-    - name: {{ .Values.httproute.gatewayName }}
-      namespace: {{ .Values.httproute.gatewayNamespace }}
-  hostnames:
-    - {{ .Values.httproute.hostname }}
+  ingressClassName: alb
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      backendRefs:
-        - name: {{ include "result.name" . }}
-          port: {{ .Values.service.port }}
+    - host: {{ .Values.ingress.hostname }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "result.name" . }}
+                port:
+                  number: {{ .Values.service.port }}
 {{- end }}

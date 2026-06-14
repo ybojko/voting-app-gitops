@@ -1,0 +1,3 @@
+hostname: grafana.redf1ag.xyz
+serviceName: monitoring-grafana
+servicePort: 80

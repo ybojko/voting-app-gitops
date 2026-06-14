@@ -1,20 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: keycloak-route
+  name: grafana-ingress
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
     repoURL: https://github.com/ybojko/voting-app-gitops.git
     targetRevision: HEAD
-    path: helm-charts/keycloak-route
+    path: helm-charts/grafana-ingress
   destination:
     server: https://kubernetes.default.svc
-    namespace: keycloak
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
