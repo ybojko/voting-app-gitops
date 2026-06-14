@@ -21,6 +21,7 @@ spec:
           command:
             - /opt/keycloak/bin/kc.sh
             - start
+            - --optimized
             - --proxy-headers=xforwarded
             - --http-enabled=true
             - --db=dev-file
