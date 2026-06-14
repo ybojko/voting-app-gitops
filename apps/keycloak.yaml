@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: https://codecentric.github.io/helm-charts
+    chart: keycloakx
+    targetRevision: 2.x
+    helm:
+      values: |
+        replicas: 1
+        image:
+          repository: quay.io/keycloak/keycloak
+          tag: "26.1"
+        command:
+          - "/opt/keycloak/bin/kc.sh"
+          - "start"
+          - "--proxy=edge"
+        extraEnv: |
+          - name: KC_HOSTNAME
+            value: keycloak.redf1ag.xyz
+          - name: KC_PROXY
+            value: edge
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+        postgresql:
+          enabled: true
+          auth:
+            username: keycloak
+            database: keycloak
+          primary:
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                cpu: 200m
+                memory: 256Mi
+            persistence:
+              size: 1Gi
+              storageClass: gp2
+        ingress:
+          enabled: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
