@@ -17,18 +17,13 @@ spec:
         image:
           repository: quay.io/keycloak/keycloak
           tag: "26.1"
-        command:
-          - "/opt/keycloak/bin/kc.sh"
-          - "start"
-          - "--proxy-headers=xforwarded"
-          - "--http-enabled=true"
-          - "--hostname-strict=false"
-          - "--db=dev-file"
         extraEnv: |
           - name: KC_HOSTNAME
             value: keycloak.redf1ag.xyz
           - name: KC_DB
             value: dev-file
+          - name: KC_PROXY_HEADERS
+            value: xforwarded
         resources:
           requests:
             cpu: 100m
