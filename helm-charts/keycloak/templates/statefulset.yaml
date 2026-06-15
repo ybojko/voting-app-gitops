@@ -54,3 +54,18 @@ spec:
             limits:
               cpu: 500m
               memory: 768Mi
+          volumeMounts:
+            - name: data
+              mountPath: /opt/keycloak/data
+  {{- if .Values.persistence.enabled }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
+        storageClassName: {{ .Values.persistence.storageClass }}
+  {{- end }}
