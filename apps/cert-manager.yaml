@@ -14,10 +14,6 @@ spec:
     helm:
       values: |
         installCRDs: true
-        cainjector:
-          enabled: false
-        webhook:
-          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
