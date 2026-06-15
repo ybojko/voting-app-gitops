@@ -39,9 +39,9 @@ spec:
               value: "true"
             - name: KC_PROXY_HEADERS
               value: xforwarded
-            - name: KEYCLOAK_ADMIN
+            - name: KC_BOOTSTRAP_ADMIN_USERNAME
               value: admin
-            - name: KEYCLOAK_ADMIN_PASSWORD
+            - name: KC_BOOTSTRAP_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: keycloak-initial-admin
