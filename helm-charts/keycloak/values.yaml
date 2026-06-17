@@ -10,6 +10,7 @@ persistence:
   enabled: true
   size: 1Gi
   storageClass: gp2
+adminPassword: "TempAdmin123!"
 resources:
   requests:
     cpu: 100m
