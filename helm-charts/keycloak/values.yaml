@@ -7,10 +7,18 @@ service:
   type: ClusterIP
   port: 8080
 persistence:
-  enabled: false
+  enabled: true
   size: 1Gi
   storageClass: gp2
 adminPassword: "TempAdmin123!"
+database:
+  vendor: postgres
+  host: postgres-postgresql.voting.svc.cluster.local
+  port: 5432
+  database: keycloak
+  username: postgres
+  existingSecret: postgres-password
+  existingSecretPasswordKey: postgres-password
 resources:
   requests:
     cpu: 100m

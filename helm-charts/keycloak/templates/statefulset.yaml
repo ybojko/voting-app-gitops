@@ -23,7 +23,10 @@ spec:
             - start
             - --proxy-headers=xforwarded
             - --http-enabled=true
-            - --db=dev-file
+            - --db=postgres
+            - --db-url-host={{ .Values.database.host }}
+            - --db-url-port={{ .Values.database.port }}
+            - --db-url-database={{ .Values.database.database }}
             - --hostname-strict=false
           ports:
             - name: http
@@ -34,7 +37,20 @@ spec:
             - name: KC_HOSTNAME
               value: keycloak.redf1ag.xyz
             - name: KC_DB
-              value: dev-file
+              value: postgres
+            - name: KC_DB_URL_HOST
+              value: {{ .Values.database.host | quote }}
+            - name: KC_DB_URL_PORT
+              value: {{ .Values.database.port | quote }}
+            - name: KC_DB_URL_DATABASE
+              value: {{ .Values.database.database | quote }}
+            - name: KC_DB_USERNAME
+              value: {{ .Values.database.username | quote }}
+            - name: KC_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.existingSecret }}
+                  key: {{ .Values.database.existingSecretPasswordKey }}
             - name: KC_HTTP_ENABLED
               value: "true"
             - name: KC_PROXY_HEADERS

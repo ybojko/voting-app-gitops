@@ -18,6 +18,7 @@ spec:
           registry: registry.k8s.io
           repository: external-dns/external-dns
           tag: v0.14.2
+        allowInsecureImages: true
         cloudflare:
           secretName: cloudflare-api-token
           proxied: false
