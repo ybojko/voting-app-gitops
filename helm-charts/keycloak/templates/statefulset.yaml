@@ -80,11 +80,11 @@ spec:
                   optional: true
           resources:
             requests:
-              cpu: 50m
-              memory: 384Mi
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: 500m
-              memory: 768Mi
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           securityContext:
             runAsUser: 1000
             runAsGroup: 0
