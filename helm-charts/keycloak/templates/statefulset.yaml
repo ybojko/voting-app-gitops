@@ -21,7 +21,7 @@ spec:
           command:
             - /opt/keycloak/bin/kc.sh
             - start
-            - --proxy=edge
+            - --proxy-headers=xforwarded
             - --http-enabled=true
             - --db=dev-file
             - --hostname-strict=false
@@ -37,8 +37,8 @@ spec:
               value: dev-file
             - name: KC_HTTP_ENABLED
               value: "true"
-            - name: KC_PROXY
-              value: edge
+            - name: KC_PROXY_HEADERS
+              value: xforwarded
             - name: KC_BOOTSTRAP_ADMIN_USERNAME
               value: admin
             - name: KC_BOOTSTRAP_ADMIN_PASSWORD
