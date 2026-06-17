@@ -1,12 +1,9 @@
-Phase 9: Keycloak + OIDC — gateway, routes, ESO, monitoring changes
+Phase 10: v2 tags + PostgreSQL Keycloak + allowInsecureImages + selfHeal
 
-- Gateway: allowedRoutes.from Same→All (cross-namespace binding)
-- Certificate: add grafana.redf1ag.xyz + keycloak.redf1ag.xyz domains
-- New helm-charts: grafana-route, keycloak-route (thin HTTPRoute wrappers)
-- New ArgoCD apps: keycloak (bitnami chart, wave1), grafana-route (wave1), keycloak-route (wave2)
-- ESO: add grafana-oauth-creds ExternalSecret → monitoring namespace
-- ESO values: add grafanaOauth.secretKey
-- monitoring: add Grafana OIDC env vars (GF_AUTH_GENERIC_OAUTH_*)
-- Previous phase cleanups: cluster-issuer, external-dns, postgres, result, worker
+- Update vote/result/worker image tags v1->v2 (apps + helm-chart values)
+- Add allowInsecureImages: true to external-dns for non-Bitnami image
+- Switch Keycloak from H2 dev-file to PostgreSQL (values + statefulset)
+- Sync postgres-password to keycloak namespace via ESO
+- Re-enable ArgoCD selfHeal on Keycloak
 
 Co-authored-by: CommandCodeBot <noreply@commandcode.ai>

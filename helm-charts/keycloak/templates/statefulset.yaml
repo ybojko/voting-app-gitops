@@ -14,6 +14,21 @@ spec:
       labels:
         app: keycloak
     spec:
+      initContainers:
+        - name: init-permissions
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /opt/keycloak/data/transaction-logs
+              chown -R 1000:0 /opt/keycloak/data
+              chmod -R 770 /opt/keycloak/data
+          volumeMounts:
+            - name: data
+              mountPath: /opt/keycloak/data
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: keycloak
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -70,6 +85,9 @@ spec:
             limits:
               cpu: 500m
               memory: 768Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 0
   {{- if .Values.persistence.enabled }}
           volumeMounts:
             - name: data
