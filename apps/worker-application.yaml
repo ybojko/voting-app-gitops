@@ -15,8 +15,8 @@ spec:
       values: |
         replicaCount: 1
         image:
-          repository: ghcr.io/ybojko/voting-app-worker
-          tag: v2
+          repository: 522868276919.dkr.ecr.eu-central-1.amazonaws.com/voting-app-worker
+          tag: latest
           pullPolicy: IfNotPresent
         env:
           REDIS_HOST: redis
@@ -29,8 +29,6 @@ spec:
           DB_PASSWORD:
             secretName: postgres-password
             key: postgres-password
-        imagePullSecrets:
-          - name: ghcr-secret
   destination:
     server: https://kubernetes.default.svc
     namespace: voting

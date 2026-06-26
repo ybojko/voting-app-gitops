@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/ybojko/voting-app-result
-  tag: v2
+  repository: 522868276919.dkr.ecr.eu-central-1.amazonaws.com/voting-app-result
+  tag: latest
   pullPolicy: IfNotPresent
 
 service:
