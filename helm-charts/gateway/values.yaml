@@ -1,0 +1,9 @@
+gatewayClass:
+  name: eg
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+
+gateway:
+  name: voting-gateway
+  namespace: voting
+  hostname: "*.redf1ag.xyz"
+  tlsSecret: voting-app-tls
