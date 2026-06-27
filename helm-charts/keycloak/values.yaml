@@ -10,7 +10,6 @@ persistence:
   enabled: true
   size: 1Gi
   storageClass: gp2
-adminPassword: "TempAdmin123!"
 database:
   vendor: postgres
   host: postgres-postgresql.voting.svc.cluster.local
