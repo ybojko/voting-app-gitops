@@ -22,4 +22,10 @@ secretEnv: {}
 #     secretName: postgres-password
 #     key: postgres-password
 
-resources: {}
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
