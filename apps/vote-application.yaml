@@ -15,8 +15,8 @@ spec:
       values: |
         replicaCount: 1
         image:
-          repository: 522868276919.dkr.ecr.eu-central-1.amazonaws.com/voting-app-vote
-          tag: latest
+          repository: ghcr.io/ybojko/voting-app-vote
+          tag: v2
           pullPolicy: IfNotPresent
         service:
           type: ClusterIP

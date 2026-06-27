@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: 522868276919.dkr.ecr.eu-central-1.amazonaws.com/voting-app-worker
-  tag: latest
+  repository: ghcr.io/ybojko/voting-app-worker
+  tag: v2
   pullPolicy: IfNotPresent
 
 env:
