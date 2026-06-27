@@ -1,9 +1,0 @@
-Phase 10: v2 tags + PostgreSQL Keycloak + allowInsecureImages + selfHeal
-
-- Update vote/result/worker image tags v1->v2 (apps + helm-chart values)
-- Add allowInsecureImages: true to external-dns for non-Bitnami image
-- Switch Keycloak from H2 dev-file to PostgreSQL (values + statefulset)
-- Sync postgres-password to keycloak namespace via ESO
-- Re-enable ArgoCD selfHeal on Keycloak
-
-Co-authored-by: CommandCodeBot <noreply@commandcode.ai>

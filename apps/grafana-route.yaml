@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: db-alias
+  name: grafana-route
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
   source:
     repoURL: https://github.com/ybojko/voting-app-gitops.git
     targetRevision: HEAD
-    path: helm-charts/db-alias
+    path: helm-charts/grafana-route
   destination:
     server: https://kubernetes.default.svc
-    namespace: voting
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true
