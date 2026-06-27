@@ -29,6 +29,10 @@ spec:
               mountPath: /opt/keycloak/data
       securityContext:
         fsGroup: 1000
+      volumes:
+        - name: realm-import
+          secret:
+            secretName: voting-app-realm
       containers:
         - name: keycloak
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -36,6 +40,7 @@ spec:
           command:
             - /opt/keycloak/bin/kc.sh
             - start
+            - --import-realm
             - --proxy-headers=xforwarded
             - --http-enabled=true
             - --db=postgres
@@ -88,11 +93,14 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 0
-  {{- if .Values.persistence.enabled }}
           volumeMounts:
+  {{- if .Values.persistence.enabled }}
             - name: data
               mountPath: /opt/keycloak/data
   {{- end }}
+            - name: realm-import
+              mountPath: /opt/keycloak/data/import
+              readOnly: true
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
     - metadata:

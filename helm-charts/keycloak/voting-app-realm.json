@@ -1,0 +1,52 @@
+{
+  "realm": "voting-app",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": false,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "clients": [
+    {
+      "clientId": "grafana",
+      "enabled": true,
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "serviceAccountsEnabled": true,
+      "redirectUris": ["https://grafana.redf1ag.xyz/login/generic_oauth"],
+      "webOrigins": ["https://grafana.redf1ag.xyz"],
+      "protocol": "openid-connect",
+      "attributes": {
+        "access.token.lifespan": "300"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "testuser",
+      "email": "testuser@redf1ag.xyz",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "Test",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "test1234",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["grafana-admin"]
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "grafana-admin",
+        "description": "Grafana admin role"
+      }
+    ]
+  }
+}
