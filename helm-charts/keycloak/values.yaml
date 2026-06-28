@@ -18,6 +18,7 @@ database:
   username: postgres
   existingSecret: postgres-password
   existingSecretPasswordKey: postgres-password
+hostname: keycloak.redf1ag.xyz
 resources:
   requests:
     cpu: 100m

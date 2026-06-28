@@ -29,3 +29,5 @@ resources:
   limits:
     cpu: 200m
     memory: 128Mi
+
+imagePullSecrets: []

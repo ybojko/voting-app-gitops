@@ -15,8 +15,14 @@
       "publicClient": false,
       "standardFlowEnabled": true,
       "serviceAccountsEnabled": true,
-      "redirectUris": ["https://grafana.redf1ag.xyz/login/generic_oauth"],
-      "webOrigins": ["https://grafana.redf1ag.xyz"],
+      "redirectUris": [
+        "https://grafana.redf1ag.xyz/login/generic_oauth",
+        "http://grafana.voting.local/login/generic_oauth"
+      ],
+      "webOrigins": [
+        "https://grafana.redf1ag.xyz",
+        "http://grafana.voting.local"
+      ],
       "protocol": "openid-connect",
       "attributes": {
         "access.token.lifespan": "300"

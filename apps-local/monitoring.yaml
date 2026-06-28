@@ -1,0 +1,94 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 68.4.0
+    helm:
+      values: |
+        alertmanager:
+          enabled: false
+        kube-state-metrics:
+          resources:
+            requests:
+              cpu: 30m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+        prometheus-node-exporter:
+          resources:
+            requests:
+              cpu: 30m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+        prometheusOperator:
+          admissionWebhooks:
+            enabled: false
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+        prometheus:
+          prometheusSpec:
+            retention: 24h
+            resources:
+              requests:
+                cpu: 200m
+                memory: 512Mi
+              limits:
+                cpu: 500m
+                memory: 1Gi
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  accessModes:
+                    - ReadWriteOnce
+                  resources:
+                    requests:
+                      storage: 5Gi
+        grafana:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          persistence:
+            enabled: true
+            size: 1Gi
+          env:
+            GF_SERVER_ROOT_URL: "http://grafana.voting.local"
+            GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+            GF_AUTH_GENERIC_OAUTH_NAME: keycloak
+            GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
+            GF_AUTH_GENERIC_OAUTH_SCOPES: openid profile email
+            GF_AUTH_GENERIC_OAUTH_AUTH_URL: http://keycloak.voting.local/realms/voting-app/protocol/openid-connect/auth
+            GF_AUTH_GENERIC_OAUTH_TOKEN_URL: http://keycloak.voting.local/realms/voting-app/protocol/openid-connect/token
+            GF_AUTH_GENERIC_OAUTH_API_URL: http://keycloak.voting.local/realms/voting-app/protocol/openid-connect/userinfo
+            GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: contains(roles[*], 'grafana-admin') && 'Admin' || contains(roles[*], 'grafana-editor') && 'Editor' || 'Viewer'
+          envFromSecret: grafana-oauth-creds
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - Replace=true

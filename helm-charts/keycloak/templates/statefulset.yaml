@@ -55,7 +55,7 @@ spec:
               containerPort: 9000
           env:
             - name: KC_HOSTNAME
-              value: keycloak.redf1ag.xyz
+              value: {{ .Values.hostname | default "keycloak.redf1ag.xyz" | quote }}
             - name: KC_DB
               value: postgres
             - name: KC_DB_URL_HOST

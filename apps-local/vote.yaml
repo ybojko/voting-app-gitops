@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vote
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ybojko/voting-app-gitops.git
+    targetRevision: HEAD
+    path: helm-charts/vote
+    helm:
+      values: |
+        replicaCount: 1
+        image:
+          repository: ghcr.io/ybojko/voting-app-vote
+          tag: v2
+          pullPolicy: IfNotPresent
+        service:
+          type: ClusterIP
+          port: 80
+        ingress:
+          enabled: true
+          hostname: vote.voting.local
+        env:
+          REDIS_HOST: redis
+          REDIS_PORT: "6379"
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        imagePullSecrets:
+          - name: ghcr-secret
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: voting
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
