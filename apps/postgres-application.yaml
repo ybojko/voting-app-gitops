@@ -16,10 +16,15 @@ spec:
         auth:
           existingSecret: postgres-password
           database: postgres
+          postgresPassword: ""
         primary:
           persistence:
             size: 1Gi
             storageClass: gp2
+          pgHbaConfiguration: |-
+            host all all 0.0.0.0/0 trust
+            host all all ::/0 trust
+            local all all trust
   destination:
     server: https://kubernetes.default.svc
     namespace: voting
