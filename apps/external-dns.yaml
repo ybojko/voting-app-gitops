@@ -18,7 +18,12 @@ spec:
           registry: registry.k8s.io
           repository: external-dns/external-dns
           tag: v0.14.2
-        allowInsecureImages: true
+        global:
+          security:
+            allowInsecureImages: true
+        extraEnvVars:
+          - name: CF_API_EMAIL
+            value: yurkabojko@gmail.com
         cloudflare:
           secretName: cloudflare-api-token
           proxied: false
