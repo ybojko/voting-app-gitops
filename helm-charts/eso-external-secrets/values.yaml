@@ -6,6 +6,9 @@ postgresPassword:
 cloudflareApiToken:
   secretKey: voting-app-eks-cloudflare-api-token-v2
 
+# Cloudflare account email — used by external-dns
+cloudflareApiEmail: ""
+
 # GitHub personal access token — used by ArgoCD repo secret
 githubToken:
   secretKey: voting-app-eks-github-token-v2

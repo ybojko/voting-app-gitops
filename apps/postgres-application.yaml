@@ -22,9 +22,9 @@ spec:
             size: 1Gi
             storageClass: gp2
           pgHbaConfiguration: |-
-            host all all 0.0.0.0/0 trust
-            host all all ::/0 trust
-            local all all trust
+            host all all 0.0.0.0/0 scram-sha-256
+            host all all ::/0 scram-sha-256
+            local all all scram-sha-256
   destination:
     server: https://kubernetes.default.svc
     namespace: voting
