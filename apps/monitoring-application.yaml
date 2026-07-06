@@ -33,7 +33,9 @@ spec:
               memory: 64Mi
         prometheusOperator:
           admissionWebhooks:
-            enabled: false
+            enabled: true
+            patch:
+              enabled: true
           resources:
             requests:
               cpu: 50m
