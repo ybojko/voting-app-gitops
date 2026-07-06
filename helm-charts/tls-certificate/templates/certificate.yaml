@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: voting-app-tls
+  namespace: voting
+spec:
+  secretName: voting-app-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - vote.redf1ag.xyz
+    - result.redf1ag.xyz
+    - grafana.redf1ag.xyz
+    - keycloak.redf1ag.xyz
