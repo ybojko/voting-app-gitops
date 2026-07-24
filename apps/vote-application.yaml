@@ -16,7 +16,7 @@ spec:
         replicaCount: 1
         image:
           repository: ghcr.io/ybojko/voting-app-vote
-          tag: v2
+          tag: sha-efc238279ec39134b7bb94129590dfa544e209a8-1
           pullPolicy: IfNotPresent
         service:
           type: ClusterIP
