@@ -16,7 +16,7 @@ spec:
         replicaCount: 1
         image:
           repository: ghcr.io/ybojko/voting-app-worker
-          tag: v3
+          tag: sha-21d8e2243d7044d8506df4832939366bdc48d348-1
           pullPolicy: IfNotPresent
         env:
           REDIS_HOST: redis
