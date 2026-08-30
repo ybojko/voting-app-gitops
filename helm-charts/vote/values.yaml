@@ -17,6 +17,9 @@ env:
   REDIS_HOST: redis
   REDIS_PORT: "6379"
 
+existingSecret: ""
+secretEnv: {}
+
 resources:
   requests:
     cpu: 50m
