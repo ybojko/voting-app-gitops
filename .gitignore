@@ -1,0 +1,18 @@
+# Secrets and credentials
+*.env
+*.secret.*
+.secrets.*
+credentials.*
+*.pem
+*.key
+*.token
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
